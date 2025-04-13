@@ -4,15 +4,30 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>操作系统-硬件结构 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="操作系统硬件结构64位相比32位CPU的优势在哪？64位CPU的计算性能一定比32位CPU高很多吗？ 64位cpu可以一次计算超过32位的数字，32位cpu要计算超过32位数字要分多步骤进行计算。 64位cpu的地址访问空间是48位，32位只有32位，所以64位cpu可以分配更大的物理内存空间。32位寻址空间4g，48位是128T  存储器的层次结构我们想象中一个场景，大学期末准备考试了，你前去图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统-硬件结构">
+<meta property="og:url" content="http://example.com/2025/04/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="操作系统硬件结构64位相比32位CPU的优势在哪？64位CPU的计算性能一定比32位CPU高很多吗？ 64位cpu可以一次计算超过32位的数字，32位cpu要计算超过32位数字要分多步骤进行计算。 64位cpu的地址访问空间是48位，32位只有32位，所以64位cpu可以分配更大的物理内存空间。32位寻址空间4g，48位是128T  存储器的层次结构我们想象中一个场景，大学期末准备考试了，你前去图">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost2/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AD%98%E5%82%A8%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB.png">
+<meta property="og:image" content="c:\Users\%E9%98%BF%E6%98%9F\AppData\Roaming\Typora\typora-user-images\image-20250413143318567.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost2/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/CPU-Cache.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/Cache%E7%9A%84%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CPU%E7%BC%93%E5%AD%98/%E7%9B%B4%E6%8E%A5Cache%E6%98%A0%E5%B0%84.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CPU%E7%BC%93%E5%AD%98/sched_setaffinity.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/%E5%86%99%E5%9B%9E1.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7%E9%97%AE%E9%A2%98%E4%BE%8B%E5%AD%902.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CPU%E7%BC%93%E5%AD%98%E4%B8%80%E8%87%B4%E6%80%A7/MESI%E5%8D%8F%E8%AE%AE.png">
+<meta property="og:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost3@main/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/CPU%E4%BC%AA%E5%85%B1%E4%BA%AB/__cacheline_aligned.png">
+<meta property="article:published_time" content="2025-04-13T07:57:18.802Z">
+<meta property="article:modified_time" content="2025-04-13T07:57:46.519Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.xiaolincoding.com/gh/xiaolincoder/ImageHost2/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%AD%98%E5%82%A8%E5%B1%82%E6%AC%A1%E5%85%B3%E7%B3%BB.png">
   
     <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -69,9 +84,7 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-操作系统-硬件结构" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="post-操作系统-硬件结构" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
     <a href="/2025/04/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84/" class="article-date">
   <time class="dt-published" datetime="2025-04-13T07:57:18.802Z" itemprop="datePublished">2025-04-13</time>
@@ -84,8 +97,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/04/13/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F-%E7%A1%AC%E4%BB%B6%E7%BB%93%E6%9E%84/">操作系统-硬件结构</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      操作系统-硬件结构
     </h1>
   
 
@@ -238,62 +251,19 @@
     </footer>
   </div>
   
-</article>
-
-
-
+    
+<nav id="article-nav">
   
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2025/04/12/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2025-04-12T08:56:53.095Z" itemprop="datePublished">2025-04-12</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2025/04/12/hello-world/">Hello World</a>
-    </h1>
+    <a href="/2025/04/12/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Hello World</div>
+    </a>
   
+</nav>
 
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2025/04/12/hello-world/" data-id="cm9fctj7z0000fkf47vjs5agm" data-title="Hello World" class="article-share-link"><span class="fa fa-share">Share</span></a>
-      
-      
-      
-    </footer>
-  </div>
   
 </article>
-
-
-
-  
 
 
 </section>
